@@ -11,7 +11,7 @@ export default function GameGrid() {
   return (
     <>
       {error && <p>{error}</p>}
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={5} p={5}>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6} p={5}>
         {isLoading &&
           skeletons.map((skeleton) => (
             <GameCardContainer>
