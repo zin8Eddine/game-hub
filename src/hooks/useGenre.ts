@@ -3,8 +3,9 @@ import useData from "./useData";
 
 interface Genre{
 
-    id:number,
+    id:number
     name:string
+    image_background: string
 }
 
 const useGenre = ()=> useData<Genre>("/genres")
