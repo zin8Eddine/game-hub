@@ -1,27 +1,40 @@
-import { List, HStack, Image, Text, Spinner } from "@chakra-ui/react";
-import useGenre from "./hooks/useGenre";
+import {
+  List,
+  HStack,
+  Image,
+  Spinner,
+  ListItem,
+  Button,
+} from "@chakra-ui/react";
+import useGenre, { Genre } from "./hooks/useGenre";
 import GetcorrpedImg from "./services/image-url";
 
-export default function GenreList() {
+interface Props {
+  onSelectGenre: (gere: Genre) => void;
+}
+
+export default function GenreList({ onSelectGenre }: Props) {
   const { data, isLoading, error } = useGenre();
 
   if (error) return null;
-  if (isLoading) return <Spinner/>;
+  if (isLoading) return <Spinner />;
 
   return (
-    <ul>
+    <List>
       {data.map((genre) => (
-        <List key={genre.id}>
+        <ListItem key={genre.id} onClick={() => onSelectGenre(genre)}>
           <HStack paddingY={2}>
             <Image
               borderRadius={8}
               boxSize="32px"
               src={GetcorrpedImg(genre.image_background)}
             />
-            <Text fontSize="lg">{genre.name}</Text>
+            <Button variant="link" fontSize={"md"}>
+              {genre.name}
+            </Button>
           </HStack>
-        </List>
+        </ListItem>
       ))}
-    </ul>
+    </List>
   );
 }
