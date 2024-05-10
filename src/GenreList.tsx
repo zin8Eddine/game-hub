@@ -11,9 +11,10 @@ import GetcorrpedImg from "./services/image-url";
 
 interface Props {
   onSelectGenre: (gere: Genre) => void;
+  selectedGenre:Genre | null
 }
 
-export default function GenreList({ onSelectGenre }: Props) {
+export default function GenreList({selectedGenre, onSelectGenre }: Props) {
   const { data, isLoading, error } = useGenre();
 
   if (error) return null;
@@ -29,7 +30,7 @@ export default function GenreList({ onSelectGenre }: Props) {
               boxSize="32px"
               src={GetcorrpedImg(genre.image_background)}
             />
-            <Button variant="link" fontSize={"md"}>
+            <Button variant="link" fontSize={"md"} fontWeight={selectedGenre?.id === genre.id ? "bold":"norml"}>
               {genre.name}
             </Button>
           </HStack>
