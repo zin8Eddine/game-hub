@@ -9,5 +9,9 @@ export default function GameHeading({ gameQuery }: Props) {
   const heading = `${gameQuery.platform?.name || ""} ${
     gameQuery.genre?.name || ""
   } Games`;
-  return <Heading mb={4}>{heading}</Heading>;
+  return (
+    <Heading mb={4} size="2xl">
+      {heading}
+    </Heading>
+  );
 }
