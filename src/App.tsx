@@ -1,4 +1,4 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./GenreList";
@@ -6,16 +6,16 @@ import { useState } from "react";
 import { Genre } from "./hooks/useGenre";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/usePlatforms";
+import SortSelector from "./SortSelector";
 
- export interface GameQuery{
-  genre:Genre | null
-  platform:Platform |null
-  
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+  ordering:string
 }
 
 function App() {
-
-    const [gameQuery,setGameQuery]= useState<GameQuery>({} as GameQuery)
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   return (
     <>
@@ -37,17 +37,21 @@ function App() {
           <GridItem area={"asid"} paddingX={5}>
             <GenreList
               selectedGenre={gameQuery?.genre}
-              onSelectGenre={(genre) => setGameQuery({...gameQuery,genre})}
+              onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
             />
           </GridItem>
         </Show>
         <GridItem area={"main"}>
-          <PlatformSelector
-            selectedPlatform={gameQuery?.platform}
-            onSelectPlatform={(platform) => setGameQuery({...gameQuery,platform})}
-          />
-          <GameGrid  gameQuery={gameQuery}
-          />
+          <HStack paddingLeft={5} spacing={5} marginBottom={3}>
+            <PlatformSelector
+              selectedPlatform={gameQuery?.platform}
+              onSelectPlatform={(platform) =>
+                setGameQuery({ ...gameQuery, platform })
+              }
+            />
+            <SortSelector sortOrder={gameQuery.ordering} onSelectOrder={(order)=> setGameQuery({...gameQuery,ordering:order})} />
+          </HStack>
+          <GameGrid gameQuery={gameQuery} />
         </GridItem>
       </Grid>
     </>
