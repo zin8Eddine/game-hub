@@ -1,8 +1,9 @@
 
+import noImg from "../assets/no-image-placeholder.webp"
 function GetcorrpedImg(url:string){
     
 
-    if (!url) return
+    if (!url) return noImg
     const target = "media/"
     const index = url.indexOf(target) + target.length
 

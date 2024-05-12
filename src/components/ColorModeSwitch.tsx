@@ -11,7 +11,7 @@ export default function ColorModeSwitch() {
         onChange={toggleColorMode}
         size="md"
       />
-      <Text> Dark mode</Text>
+      <Text whiteSpace="nowrap"> Dark mode</Text>
     </HStack>
   );
 }
